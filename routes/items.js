@@ -2,11 +2,86 @@ const express = require('express');
 const router = express.Router();
 const Item = require('../models/item');
 
+/**
+    * @swagger
+    * components:
+    *   schemas:
+    *     Item:
+    *       type: object
+    *       properties:
+    *         name:
+    *           type: string
+    *           description: The item's name
+    *         description:
+    *           type: string
+    *           description: The item's description
+    */
+/**
+    * @swagger
+    * /items:
+    *   get:
+    *     summary: Retrieve a list of items
+    *     responses:
+    *       201:
+ *         description: List of items created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Item'
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Internal server error occurred"
+ *
+    * 
+    *   post:
+    *     summary: Create a new item
+    *     requestBody:
+    *       required: true
+    *       content:
+    *         application/json:
+    *           schema:
+    *             $ref: '#/components/schemas/Item'
+    *     responses:
+    *       200:
+ *         description: Item created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Item'
+ *       400:
+ *         description: Bad request (e.g., missing or invalid fields)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "There was an issue creating the Item"
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Internal server error occurred"
+    */
+
 // Create a new item
 router.post('/', async (req, res) => {
   try {
     const newItem = await Item.create(req.body);
-    res.status(201).json(newItem);
+    res.status(200).json(newItem);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -16,7 +91,7 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const items = await Item.find();
-    res.json(items);
+    res.status(201).json(items);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

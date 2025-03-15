@@ -1,9 +1,44 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+// for the swagger
+const swaggerUi = require('swagger-ui-express');
+const swaggerJSDoc = require('swagger-jsdoc');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+
+   // Swagger definition
+   const swaggerOptions = {
+    swaggerDefinition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'My API',
+            version: '1.0.0',
+            description: 'API documentation using Swagger',
+        },
+        servers: [
+            {
+                url: `http://localhost:${PORT}`,
+            },
+        ],
+   components: {
+     securitySchemes: {
+         bearerAuth: {
+             type: 'http',
+             scheme: 'bearer',
+             bearerFormat: 'JWT', 
+         },
+     },
+ },
+    },
+    apis: ['./routes/*.js'], // Path to your API docs
+};
+
+const swaggerDocs = swaggerJSDoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
 
 // Middleware
 app.use(bodyParser.json());
