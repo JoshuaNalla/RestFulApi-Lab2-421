@@ -18,7 +18,11 @@ mongoose.connect('mongodb+srv://jmn6092:Joshua%40123@lab2-take2.ehfku.mongodb.ne
 
 // Routes
 const itemsRouter = require('./routes/items');
+const customerRouter = require('./routes/customers');
+const orderRouter = require('./routes/orders')
 app.use('/items', itemsRouter);
+app.use('/customers', customerRouter);
+app.use('/orders', orderRouter);
 
 // Start the server
 app.listen(PORT, () => {
@@ -45,3 +49,4 @@ app.get('/delayed', async (req, res) => {
     console.log("error", error);
   }
 });
+
