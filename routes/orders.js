@@ -3,33 +3,23 @@ const router = express.Router();
 const Order = require('../models/order');
 
 /**
-    * @swagger
-    * components:
-    *   schemas:
-    *     Order:
-    *       type: object
-    *       properties:
-    *         customerId:
-    *           type: string
-    *           description: The Customer who is buying's id
-    *         itemId:
-    *           type: string
-    *           description: the Item that is being bought's id
-    */
-/**
-    * @swagger
-    * components:
-    *   schemas:
-    *     Item:
-    *       type: object
-    *       properties:
-    *         name:
-    *           type: string
-    *           description: The item's name
-    *         description:
-    *           type: string
-    *           description: The item's description
-    */
+ * @swagger
+ * components:
+ *   schemas:
+ *     Order:
+ *       type: object
+ *       properties:
+ *         customerId:
+ *           type: string
+ *           description: The Customer who is buying's id
+ *         itemId:
+ *           type: string
+ *           description: The Item that is being bought's id
+ *       example:
+ *         customerId: 34kh2345325kj342
+ *         itemId: 324kj3bn2432kkj34k2
+ */
+
 /**
     * @swagger
     * /orders:
@@ -41,7 +31,7 @@ const Order = require('../models/order');
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Item'
+ *               $ref: '#/components/schemas/Order'
  *       500:
  *         description: Internal server error
  *         content:
@@ -61,7 +51,7 @@ const Order = require('../models/order');
     *       content:
     *         application/json:
     *           schema:
-    *             $ref: '#/components/schemas/Item'
+    *             $ref: '#/components/schemas/Order'
     *     responses:
     *       201:
  *         description: order created successfully

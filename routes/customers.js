@@ -15,6 +15,9 @@ const Customer = require('../models/customer');
     *         age:
     *           type: integer
     *           description: The customer's age
+    *       example:
+    *          name: Jessica Jones
+    *          age: 22
     */
 /**
     * @swagger

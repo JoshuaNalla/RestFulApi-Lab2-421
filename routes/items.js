@@ -15,6 +15,9 @@ const Item = require('../models/item');
     *         description:
     *           type: string
     *           description: The item's description
+    *       example:
+    *         name: basketball
+    *         description: sports ball
     */
 /**
     * @swagger
