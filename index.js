@@ -24,3 +24,24 @@ app.use('/items', itemsRouter);
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+// introduced asynch operation using setTimeout
+const delayedOperation = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log('Asynchronous operation introduced, and completed with 2 seconds delay')
+      resolve();
+    }, 2000); // the seconds changed here
+  })
+};
+
+// new endpoint to test the async operation
+app.get('/delayed', async (req, res) => {
+  try {
+    console.log('initiliazing async operation...');
+      await delayedOperation();
+      res.send('async operation completed successfully after two seconds (delay introduced)');
+  } catch (error){
+    console.log("error", error);
+  }
+});
