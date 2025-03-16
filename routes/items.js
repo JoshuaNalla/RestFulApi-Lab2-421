@@ -3,29 +3,29 @@ const router = express.Router();
 const Item = require('../models/item');
 
 /**
-    * @swagger
-    * components:
-    *   schemas:
-    *     Item:
-    *       type: object
-    *       properties:
-    *         name:
-    *           type: string
-    *           description: The item's name
-    *         description:
-    *           type: string
-    *           description: The item's description
-    *       example:
-    *         name: basketball
-    *         description: sports ball
-    */
+ * @swagger
+ * components:
+ *   schemas:
+ *     Item:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: The item's name
+ *         description:
+ *           type: string
+ *           description: The item's description
+ *       example:
+ *         name: basketball
+ *         description: sports ball
+ */
 /**
     * @swagger
     * /items:
     *   get:
     *     summary: Retrieve a list of items
     *     responses:
-    *       201:
+    *       200:
  *         description: List of items created successfully
  *         content:
  *           application/json:
@@ -52,7 +52,7 @@ const Item = require('../models/item');
     *           schema:
     *             $ref: '#/components/schemas/Item'
     *     responses:
-    *       200:
+    *       201:
  *         description: Item created successfully
  *         content:
  *           application/json:
@@ -84,7 +84,7 @@ const Item = require('../models/item');
 router.post('/', async (req, res) => {
   try {
     const newItem = await Item.create(req.body);
-    res.status(200).json(newItem);
+    res.status(201).json(newItem);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -94,7 +94,7 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const items = await Item.find();
-    res.status(201).json(items);
+    res.status(200).json(items);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

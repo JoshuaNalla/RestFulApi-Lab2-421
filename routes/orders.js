@@ -94,29 +94,29 @@ const Order = require('../models/order');
 // Create a new Order
 router.post('/', async (req, res) => {
     try {
-      const { idOfCustomer, idOfItem, quantity } = req.body;
+      // const { idOfCustomer, idOfItem, quantity } = req.body;
   
-      // Check if customer exists
-      const customer = await Customer.findById(idOfCustomer);
-      if (!customer) {
-        return res.status(404).json({ message: 'Customer not found' });
-      }
+      // // Check if customer exists
+      // const customer = await customer.findById(idOfCustomer);
+      // if (!customer) {
+      //   return res.status(404).json({ message: 'Customer not found' });
+      // }
   
-      // Check if item exists
-      const item = await Item.findById(idOfItem);
-      if (!item) {
-        return res.status(404).json({ message: 'Item not found' });
-      }
+      // // Check if item exists
+      // const item = await Item.findById(idOfItem);
+      // if (!item) {
+      //   return res.status(404).json({ message: 'Item not found' });
+      // }
   
-      // Create the order
-      const newOrder = await Order.create({
-        idOfCustomer,
-        idOfItem,
-        quantity,
-      });
+      // // Create the order
+      // const newOrder = await Order.create({
+      //   idOfCustomer,
+      //   idOfItem,
+      //   quantity,
+      // });
       // time delay for order processing. 5 seconds at the moment.
       await new Promise ((resolve) =>setTimeout(resolve, 5000));
-      res.status(201).json(newOrder);
+      res.status(201).json(req.body);
     } catch (err) {
       res.status(400).json({ message: err.message });
     }
