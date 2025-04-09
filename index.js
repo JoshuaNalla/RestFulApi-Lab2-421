@@ -6,7 +6,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerJSDoc = require('swagger-jsdoc');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 
    // Swagger definition
@@ -60,8 +60,8 @@ app.use('/customers', customerRouter);
 app.use('/orders', orderRouter);
 
 // Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(3000, () => {
+  console.log(`Server is running on port ${3000}`);
 });
 
 // introduced asynch operation using setTimeout
