@@ -44,7 +44,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use(bodyParser.json());
 
 // MongoDB Connection
-mongoose.connect('mongodb+srv://jmn6092:Joshua%40123@lab2-take2.ehfku.mongodb.net/?retryWrites=true&w=majority&appName=Lab2-take2', {
+mongoose.connect('mongodb://localhost:27017/Lab4system', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
