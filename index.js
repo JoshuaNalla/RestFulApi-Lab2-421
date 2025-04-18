@@ -20,7 +20,7 @@ const PORT = process.env.PORT || 4000;
         },
         servers: [
             {
-                url: `http://localhost:${PORT}`,
+                url: `http://localhost:${PORT}`, // this should be 4000
             },
         ],
    components: {
@@ -33,7 +33,7 @@ const PORT = process.env.PORT || 4000;
      },
  },
     },
-    apis: ['./routes/*.js'], // Path to your API docs
+    apis: ['./routes/*.js'], // Path to the API docs
 };
 
 const swaggerDocs = swaggerJSDoc(swaggerOptions);
@@ -44,12 +44,19 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use(bodyParser.json());
 
 // MongoDB Connection
-mongoose.connect('mongodb://localhost:27017/Lab4system', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log('MongoDB connected successfully'))
-.catch(err => console.error('MongoDB connection error:', err));
+const MONGO_URI =
+  process.env.MONGO_URI ||
+  'mongodb://localhost:27017/Lab4system';
+
+mongoose
+  .connect(MONGO_URI, {
+    useNewUrlParser:    true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log('MongoDB connected successfully'))
+  .catch(err => console.error('MongoDB connection error:', err));
+
+
 
 // Routes
 const itemsRouter = require('./routes/items');
@@ -60,7 +67,7 @@ app.use('/customers', customerRouter);
 app.use('/orders', orderRouter);
 
 // Start the server
-app.listen(3000, () => {
+app.listen(3000, () => { // the server should run on port 3000
   console.log(`Server is running on port ${3000}`);
 });
 
