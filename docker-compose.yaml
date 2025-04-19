@@ -1,0 +1,27 @@
+
+services:
+  mongodb:
+    image: mongo:latest             
+    container_name: mongodb
+    restart: always
+    volumes:
+      - mongodata:/data/db          #  persist data under named volume
+    ports:
+      - "27017:27017"               
+
+  app:
+    image: joshingtonthesecond/lab3containerize  
+    build:
+      context: .
+    depends_on:
+      - mongodb      #starts after the database is started               
+    environment:             #how to connect to the database        
+      MONGO_URI: mongodb://mongodb:27017/Lab4system
+      NODE_ENV: production
+      PORT: 3000 
+    ports:
+      - "4000:3000"                 #   host 4000 -> container 3000
+
+volumes:
+  mongodata: 
+    driver: local
